@@ -8,7 +8,7 @@ TARGET = elf_i386
 # TARGET = elf_x86_64
 
 main: $(NAME).o
-	ld -m $(TARGET) -s -o $(OUTDIR)/$(NAME) $(OUTDIR)/$(NAME).o
+	ld -m $(TARGET) -s -o $(OUTDIR)/main $(OUTDIR)/$(NAME).o
 
 $(NAME).o: $(ENTRY)
 	nasm -f $(SIZE) $(ENTRY) -o $(OUTDIR)/$(NAME).o

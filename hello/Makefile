@@ -7,7 +7,7 @@ SIZE = elf32
 # TARGET = elf_x86_64
 
 main: $(NAME).o
-	ld -m $(TARGET) -s -o $(OUTDIR)/$(NAME) $(OUTDIR)/$(NAME).o
+	ld -m $(TARGET) -s -o $(OUTDIR)/main $(OUTDIR)/$(NAME).o
 
 $(NAME).o: main.asm
 	nasm -f $(SIZE) main.asm -o $(OUTDIR)/$(NAME).o

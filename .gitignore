@@ -1,6 +1,2 @@
-*
-!*.s
-!*.asm
-!*.c
-!example_makefile
-!readme.md
+**/*.o
+**/main
