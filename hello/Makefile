@@ -1,12 +1,17 @@
 NAME = hello
-OUTFILE = .
+OUTDIR = .
+TARGET = elf_i386
+SIZE = elf32
+
+# SIZE = elf64
+# TARGET = elf_x86_64
 
 main: $(NAME).o
-	ld -m elf_i386 -s -o $(OUTFILE)/$(NAME) $(OUTFILE)/$(NAME).o
+	ld -m $(TARGET) -s -o $(OUTDIR)/$(NAME) $(OUTDIR)/$(NAME).o
 
 $(NAME).o: main.asm
-	nasm -f elf main.asm -o $(OUTFILE)/$(NAME).o
+	nasm -f $(SIZE) main.asm -o $(OUTDIR)/$(NAME).o
 
 clean:
-	rm $(OUTFILE)/*.o $(OUTFILE)/$(NAME)
+	rm $(OUTDIR)/*.o $(OUTDIR)/$(NAME)
 
