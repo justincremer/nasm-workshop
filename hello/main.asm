@@ -7,7 +7,7 @@ section	.bss
 section	.text
 global _start     ; must be declared for linker (ld)
 
-; 32 bit mode	
+; 32 bit mode
 _start:	            ; tells linker entry point
 	mov	edx,len     ; message length
 	mov	ecx,msg     ; message to write
@@ -18,6 +18,7 @@ _start:	            ; tells linker entry point
 	mov	eax,1       ; system call number (sys_exit)
 	int	0x80        ; call kernel
 
+; 64 bit mode	
 ; _start:	            ; tells linker entry point
 ; 	mov	rdx,len     ; message length
 ; 	mov	rcx,msg     ; message to write
