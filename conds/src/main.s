@@ -3,44 +3,49 @@
 	mov ecx, %1			 ; text
 	mov ebx, 1	         ; file descriptor (stdout)
 	mov eax, 4	         ; system call number (sys_write)
-	int 0x80	         ; call kernel	
+	int 0x80	         ; call kernel
 %endmacro
-	
+
 section	.text
 global _start
 
 _start:
-	print msg, msg_len
 	mov ecx, [num1]
-	cmp ecx, [num2]
-	jg comp_third
-	mov ecx, [num2]
-	call comp_third
+	mov edx, [num2]
+	call comp_move
 
-comp_third:
-	cmp ecx, [num3]
-	jg _exit
-	mov ecx, [num3]    ; set num3 if > ecx
+	mov edx, [num3]	
+	call comp_move
+	
+	mov [largest], ecx
 	call _exit
-	
+
+comp_move:
+	cmp ecx, edx
+	jg _skip
+	mov ecx, edx
+
+_skip:
+
 _exit:
-	mov edx, 2
-	int 0x80             ; print ecx (largest number)
-	print nl, nl_len     ; print newline
-	
-	mov eax, 1	         ; system call number (sys_exit)
-	int 0x80	         ; call kernel
-	
+	print msg, msg_len
+	print largest, 2
+	print nl, nl_len	
+
+	mov eax, 1     		 ; sys_exit
+	int 80h
+
 section	.data
-	msg db "The largest number is: ",
+	msg db "The largest digit is: ", 
 	msg_len equ $ - msg
-	
+
 	nl db 0xA, 0xD
 	nl_len equ $ - nl
-
-	num1 dd '100'
-	num2 dd '50'
-	num3 dd '150'
 	
-section	.bss
+	num1 dd '31'
+	num2 dd '22'
+	num3 dd '47'
+
+segment .bss
+	largest resb 2
 
