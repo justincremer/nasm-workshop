@@ -1,11 +1,12 @@
+NAME = hello
 OUTFILE = .
 
-main: hello.o
-	ld -m elf_i386 -s -o $(OUTFILE)/main $(OUTFILE)/hello.o
+main: $(NAME).o
+	ld -m elf_i386 -s -o $(OUTFILE)/$(NAME) $(OUTFILE)/$(NAME).o
 
-hello.o: hello.asm
-	nasm -f elf hello.asm -o $(OUTFILE)/hello.o
+$(NAME).o: main.asm
+	nasm -f elf main.asm -o $(OUTFILE)/$(NAME).o
 
 clean:
-	rm $(OUTFILE)/*.o $(OUTFILE)/main
+	rm $(OUTFILE)/*.o $(OUTFILE)/$(NAME)
 
